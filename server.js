@@ -21,7 +21,7 @@ mongoose
     console.log("DB connection Successfully!");
   });
 
-// Start the server
+//Developed with love by _tars49
 const port = 3000 || process.env.PORT;
 app.listen(port, () => {
   console.log(`Application is running on port ${port}`);

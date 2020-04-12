@@ -7,14 +7,14 @@ const testSchema = new mongoose.Schema({
   },
   start_time: {
     type: Number,
-    default: Date.now()
+    required: [true, "Test start time is required"]
   },
   end_time: {
     type: Number,
-    required: [true, "Test end time required"]
+    required: [true, "Test end time is required"]
   },
   questions: {
-    coding_question: [
+    coding: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "CodingQuestion"
