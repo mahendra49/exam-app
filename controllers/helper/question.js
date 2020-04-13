@@ -1,5 +1,5 @@
-const CodingQuestion = require("../models/coding_question");
-const MultipleChoice = require("../models/multiple_choice");
+const CodingQuestion = require("../../models/coding_question");
+const MultipleChoice = require("../../models/multiple_choice");
 
 const question_util = {
   coding: {
