@@ -6,7 +6,7 @@ const question_util = {
     getAll: async params => {
       try {
         const questions = await CodingQuestion.find({});
-        return question;
+        return questions;
       } catch (err) {
         console.log(`Error --- in coding-getAll--${err}`);
         return null;
@@ -17,7 +17,7 @@ const question_util = {
         const question = await CodingQuestion.create(body);
         return question;
       } catch (err) {
-        console.log(`Error --- in coding-create--${err}`);
+        console.log(`Error --- in coding-question-create--${err}`);
         return null;
       }
     },
@@ -32,7 +32,9 @@ const question_util = {
     },
     findByIdAndUpdate: async (id, body) => {
       try {
-        const question = await CodingQuestion.findByIdAndUpdate(id, body);
+        const question = await CodingQuestion.findByIdAndUpdate(id, body, {
+          new: true
+        });
         return question;
       } catch (err) {
         console.log(`Error --- in coding-find By Id and Update--${err}`);
@@ -53,7 +55,7 @@ const question_util = {
     getAll: async params => {
       try {
         const questions = await MultipleChoice.find({});
-        return question;
+        return questions;
       } catch (err) {
         console.log(`Error --- in multiple choice-getAll--${err}`);
         return null;
@@ -79,7 +81,9 @@ const question_util = {
     },
     findByIdAndUpdate: async (id, body) => {
       try {
-        const question = await MultipleChoice.findByIdAndUpdate(id, body);
+        const question = await MultipleChoice.findByIdAndUpdate(id, body, {
+          new: true
+        });
         return question;
       } catch (err) {
         console.log(
@@ -90,7 +94,7 @@ const question_util = {
     },
     deleteById: async id => {
       try {
-        const question = await CodingQuestion.findByIdAndDelete(id);
+        const question = await MultipleChoice.findByIdAndDelete(id);
         return true;
       } catch (err) {
         console.log(`Error --- in multiple choice delete -delete--${err}`);

@@ -1,17 +1,46 @@
 const mongoose = require("mongoose");
 
+/* 
+
+//sample data
+
+{
+  "question_statement":"sample",
+  "input_description": "some input description",
+  "output_description" : "some output description",
+  "sample_test_case" : {
+    "input": "some input for sample input",
+    "output": "expected output"
+  },
+  "test_cases" : [
+    {
+      "input": "hidden1",
+      "output": "expected ouput hidden1",
+      "score": 5
+    },
+    {
+      "input": "hidden2 input",
+      "output": "expected output hidden2"
+    }
+
+  ],
+  "question_solution": "#include<stdo.h>"
+}
+
+*/
+
 const codingQuestionSchema = new mongoose.Schema({
   question_statement: {
     type: String,
-    require: [true, "problem statement required"]
+    required: [true, "problem statement required"]
   },
   input_description: {
     type: String,
-    require: [true, "input description statement required"]
+    required: [true, "input description statement required"]
   },
-  output__description: {
+  output_description: {
     type: String,
-    require: [true, "output statement required"]
+    required: [true, "output statement required"]
   },
   sample_test_case: {
     input: String,
@@ -24,7 +53,8 @@ const codingQuestionSchema = new mongoose.Schema({
       score: {
         type: Number,
         min: 0,
-        max: [10, "max score for each test score is 10"]
+        max: [10, "max score for each test score is 10"],
+        default: 0
       }
     }
   ],

@@ -12,11 +12,12 @@ const questionController = require("../../controllers/questionController");
 */
 
 //questionController
+// url format from root : localhost/api/questions/:type/:id
 
-router.get("/", questionController.getAllQuestions);
-router.post("/", questionController.createQuestion);
-router.get("/:id", questionController.findQuestionById);
-router.put("/:id", questionController.findQuestionByIdAndUpdateQuestion);
-router.delete("/:id", questionController.deleteQuestionById);
+router.get("/:type", questionController.getAllQuestions);
+router.post("/:type", questionController.createQuestion);
+router.get("/:type/:id", questionController.findQuestionById);
+router.put("/:type/:id", questionController.findQuestionByIdAndUpdateQuestion);
+router.delete("/:type/:id", questionController.deleteQuestionById);
 
 module.exports = router;

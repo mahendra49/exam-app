@@ -1,5 +1,7 @@
 // make a docs
 
+//make good validatos for all the end points
+
 // make a judger for coding and multiple choice 
 
 // make a final judger when test completes

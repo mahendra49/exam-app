@@ -11,12 +11,14 @@ const question_util = require("./helper/question");
 
 //Question
 
+/* 
+ url---   /:type
+*/
 const getAllQuestions = async (req, res, next) => {
   try {
-    const coding_questions = question_util.coding.getAll();
-    const multiple_choice = question_util.multiple_choice.getAll();
-    const all_questions = [...coding_questions, ...multiple_choice];
-    res.status(200).send(all_questions);
+    const question_type = req.params.type;
+    const questions = await question_util[question_type].getAll();
+    res.status(200).send(questions);
   } catch (err) {
     console.log(err);
     res.status(500).send({ error: true, message: `Database Error -- ${err}` });
@@ -45,9 +47,10 @@ const getAllQuestions = async (req, res, next) => {
 // TODO : validation for the question body
 const createQuestion = async (req, res, next) => {
   //get the type fo question and save accordingly
-  const question_type = req.body.type;
-  const question_body = req.body[question_type];
-  const question = question_util[question_type].create(question_body);
+  const question_type = req.params.type;
+  const question_body = req.body;
+  console.log(question_body);
+  const question = await question_util[question_type].create(question_body);
   if (!question) {
     return res
       .status(500)
@@ -63,7 +66,7 @@ const createQuestion = async (req, res, next) => {
 const findQuestionById = async (req, res, next) => {
   const question_type = req.params.type;
   const question_id = req.params.id;
-  const question = question_util[question_type].findById(question_id);
+  const question = await question_util[question_type].findById(question_id);
   if (!question)
     return res
       .status(500)
@@ -85,11 +88,12 @@ const findQuestionById = async (req, res, next) => {
 const findQuestionByIdAndUpdateQuestion = async (req, res, next) => {
   const question_id = req.params.id;
   const to_update_question_type = req.params.type;
-  const to_update_question_body = req.body[to_update_question_type];
-  const new_updated_question = question_util[
+  const to_update_question_body = req.body;
+  console.log(req.body);
+  const new_updated_question = await question_util[
     to_update_question_type
   ].findByIdAndUpdate(question_id, to_update_question_body);
-
+  console.log(new_updated_question);
   if (!new_updated_question)
     return res
       .status(500)
@@ -108,7 +112,7 @@ const findQuestionByIdAndUpdateQuestion = async (req, res, next) => {
 const deleteQuestionById = async (req, res, next) => {
   const question_id = req.params.id;
   const question_type = req.params.type;
-  const question = question_util[question_type].deleteById(question_id);
+  const question = await question_util[question_type].deleteById(question_id);
   if (!question)
     return res
       .status(500)

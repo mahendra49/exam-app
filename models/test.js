@@ -1,5 +1,19 @@
 const mongoose = require("mongoose");
 
+/* 
+  Example : 
+
+
+  {
+    test_name : "sample",
+    start_time : {},
+    end_time:{},
+    question:{}
+
+  }
+
+*/
+
 const testSchema = new mongoose.Schema({
   test_name: {
     type: String,

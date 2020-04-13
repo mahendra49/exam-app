@@ -42,7 +42,9 @@ const findTestByIdAndUpdateTest = async (req, res, next) => {
   const test_id = req.params.id;
   const to_update_test = req.body;
   try {
-    const updated_test = await Test.findByIdAndUpdate(test_id, to_update_test);
+    const updated_test = await Test.findByIdAndUpdate(test_id, to_update_test, {
+      new: true
+    });
     res.status(200).send(updated_test);
   } catch (err) {
     console.log(`Error --- in Test-update-test--${err}`);
@@ -50,6 +52,8 @@ const findTestByIdAndUpdateTest = async (req, res, next) => {
   }
 };
 
+// check if test exists only then delete --- any valid ID format just gets deleted even for
+// non existing ids...but the id format is right so thats a problem
 const deleteTestById = async (req, res, next) => {
   const test_id = req.params.id;
   try {

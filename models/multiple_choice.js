@@ -1,5 +1,14 @@
 const mongoose = require("mongoose");
 
+/* 
+  {
+    "question_statement":"sample descriiption of the multiple choice",
+    "choices": ["A","B","C","D"],
+    "solution" : "A"
+  }
+
+ */
+
 const multipleChoiceSchema = new mongoose.Schema({
   question_statement: {
     type: String,

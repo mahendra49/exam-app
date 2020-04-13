@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user.js");
 
 const login = async (req, res, next) => {
-  console.log("in login");
+  console.log(req.body);
   const user = await User.findOne({ username: req.body.username });
 
   if (!user)
@@ -21,7 +21,6 @@ const login = async (req, res, next) => {
     user
   );
 
-  console.log(payload);
   req.session.user = payload;
   res.status(200).send(payload);
 };
