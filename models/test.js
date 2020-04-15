@@ -40,7 +40,8 @@ const testSchema = new mongoose.Schema({
         ref: "MultipleChoice"
       }
     ]
-  }
+  },
+  registered_users: [{ username: { type: String, required: true } }]
 });
 
 testSchema.pre("validate", function(next) {

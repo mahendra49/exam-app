@@ -89,11 +89,11 @@ const findQuestionByIdAndUpdateQuestion = async (req, res, next) => {
   const question_id = req.params.id;
   const to_update_question_type = req.params.type;
   const to_update_question_body = req.body;
-  console.log(req.body);
+  //console.log(req.body);
   const new_updated_question = await question_util[
     to_update_question_type
   ].findByIdAndUpdate(question_id, to_update_question_body);
-  console.log(new_updated_question);
+  //console.log(new_updated_question);
   if (!new_updated_question)
     return res
       .status(500)

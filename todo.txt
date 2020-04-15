@@ -6,3 +6,33 @@
 
 // make a final judger when test completes
 
+/*
+// to generate unique id :
+
+solutionSchema.pre('save', function (next) {
+  // 保存
+  if (this.sid === -1) {
+    // 表示新的提交被创建了，因此赋予一个新的 id
+    ids
+      .generateId('Solution')
+      .then(id => {
+        this.sid = id
+      })
+      .then(next)
+  } else {
+    next()
+  }
+})
+
+
+*/
+
+
+
+
+/* 
+    TODO - emit a a event when time in test schema when test time completes, so all multiple choice 
+    for the users can be evalaues along with coding questions and final 
+    result can be published
+*/
+

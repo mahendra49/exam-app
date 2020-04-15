@@ -1,0 +1,31 @@
+plan for submissions:
+
+/submission/coding 
+
+req.data :
+
+{
+    defines in coding_submission schema
+}
+
+update the score as defined
+
+------
+Final submission
+
+/submission/test/
+
+{
+    multiple_choice:[
+        //as in multiple_choice submission schema model
+    ],
+    coding:[]
+
+}
+
+1. evaluate the multiple_choice questions:
+2. update the score for the user 
+3. update final score for the user, for given test in the result schema
+4. publish the result
+
+
