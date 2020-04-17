@@ -35,7 +35,7 @@ const submit = async (req, res, next) => {
       .send({ error: true, message: "Error occured, please check the url" });
 
   //pass all other details like req.session.user and test_id and question_id
-  const submit_result = await Submitter.submit(_user, submit_body);
+  const submit_result = await Submitter._submit(_user, submit_body);
   //check for error in submit result like for DB error or req error
 
   //send them in response

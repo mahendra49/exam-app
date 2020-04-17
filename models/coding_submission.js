@@ -31,7 +31,7 @@ const codingSubmissionSchema = new mongoose.Schema({
     required: [true, "question_id is required"]
   },
   source_code: String,
-  language: {
+  lang: {
     type: String,
     enum: configs.language
   },
@@ -80,4 +80,6 @@ codingSubmissionSchema.pre("validate", function(next) {
   }
 });
 
-module.exports = mongoose.model("codingSubmission", codingSubmissionSchema);
+codingSubmissionSchema.pre("save", function(next) {});
+
+module.exports = mongoose.model("CodingSubmission", codingSubmissionSchema);

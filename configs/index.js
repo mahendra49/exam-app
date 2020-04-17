@@ -1,3 +1,5 @@
+const path = require("path");
+
 const config = {};
 
 config.judge = {
@@ -16,6 +18,16 @@ config.multiple_choice = {
   default_selected_choice: ["NONE"]
 };
 
-config.language = ["c++", "java", "c", "python"];
+config.languages = ["c++", "java", "c", "python"];
+
+config.TMP_FILES = path.join(__dirname, "..", "code-judger/tmps/");
+config.ROOT_PATH = path.join(__dirname, "..");
+
+config.languages_extensions = {
+  "c++": ".cpp",
+  java: ".java",
+  c: "c",
+  python: ".py"
+};
 
 module.exports = config;

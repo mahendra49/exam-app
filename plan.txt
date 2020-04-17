@@ -2,10 +2,16 @@ plan for submissions:
 
 /submission/coding 
 
-req.data :
+req.body:
 
 {
-    defines in coding_submission schema
+    username:username,
+    test_id,
+    question_id,
+    solution:{
+        lang,
+        source_code
+    }
 }
 
 update the score as defined
@@ -28,4 +34,13 @@ Final submission
 3. update final score for the user, for given test in the result schema
 4. publish the result
 
+
+
+------------------
+coding questions
+
+it is better to store test cases in files then comparing generated output with file(actual output)
+
+
+------------------
 
