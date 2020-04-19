@@ -26,7 +26,7 @@ config.ROOT_PATH = path.join(__dirname, "..");
 config.languages_extensions = {
   "c++": ".cpp",
   java: ".java",
-  c: "c",
+  c: ".c",
   python: ".py"
 };
 
