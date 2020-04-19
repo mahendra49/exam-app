@@ -20,9 +20,10 @@ const execute = (command, args_arr, options) => {
   const end_time = new Date();
 
   //process exit code
-  if (pc.status != 0) {
+  if (pc.status && pc.status != 0) {
     pc_status.error = true;
     pc_status.error_msg = pc.stderr.toString();
+    return pc_status;
   }
 
   //see if terminated by signal
@@ -30,6 +31,7 @@ const execute = (command, args_arr, options) => {
   if (signal_termination) {
     pc_status.error = true;
     pc_status.error_msg = signal_termination.error_msg;
+    return pc_status;
   }
 
   // NO errors

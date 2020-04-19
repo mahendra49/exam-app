@@ -1,4 +1,3 @@
-const path = require("path");
 const util = require("./util");
 const commandLine = require("./command-line");
 
@@ -12,49 +11,36 @@ const runStr = (source_code, lang, options) => {
     lang_ext,
     source_code
   );
-  const cc_o_out_file_path = tmp_file_path.split(".")[0] + ".out";
-  console.log(cc_o_out_file_path);
-
-  const cc_args = [tmp_file_path, "-o", cc_o_out_file_path];
+  options = util.makeOptions(options, tmp_file_path);
+  const file_name = util.pathBaseName(tmp_file_path);
+  const cc_o_out_file_name = util.pathBaseName(tmp_file_path, ".cpp") + ".out";
+  const cc_args = [file_name, "-o", cc_o_out_file_name];
   const cc_status = commandLine.execute("g++", cc_args, options);
-  console.log(cc_status);
   if (cc_status.error) return cc_status;
-  options = util.makeOptions(options);
-  const cr_status = commandLine.execute(cc_o_out_file_path, null, options);
-  console.log(cr_status);
+  const cr_status = commandLine.execute(
+    `./${cc_o_out_file_name}`,
+    null,
+    options
+  );
   return cr_status;
 };
 
 const runFile = (source_file, lang, options) => {
   const lang_ext = util.getLangExtension(lang);
-  if (lang_ext !== ".cpp") throw new Error(`${lang} is not supported`);
-  const cc_o_out_file_path = source_file.split(".")[0] + ".out";
-  console.log(cc_o_out_file_path);
-  const cc_args = [source_file, "-o", cc_o_out_file_path];
+  if (lang_ext !== ".cpp" || util.pathExtName(source_file) != ".cpp")
+    throw new Error(`${lang} is not supported`);
+  options = util.makeOptions(options, source_file);
+  const file_name = util.pathBaseName(source_file);
+  const cc_o_out_file_name = util.pathBaseName(source_file, ".cpp") + ".out";
+  const cc_args = [file_name, "-o", cc_o_out_file_name];
   const cc_status = commandLine.execute("g++", cc_args, options);
-  console.log(cc_status);
   if (cc_status.error) return cc_status;
-  options = util.makeOptions(options);
-  const cr_status = commandLine.execute(cc_o_out_file_path, null, options);
-  console.log(cr_status);
+  const cr_status = commandLine.execute(
+    `./${cc_o_out_file_name}`,
+    null,
+    options
+  );
   return cr_status;
 };
-
-/* 
-const test = `
-	#include<iostream>
-	using namespace std;
-	int main(){
-    cout<<"hello";
-		return 0;
-	}
-`;
-
-const run_file_path =
-  "/Users/mahendrasuthar/Desktop/testProjects/exam-app/code-judge/tmps/135f7240-81fe-11ea-9d20-3d8a6f5a778d/135f9950-81fe-11ea-9d20-3d8a6f5a778d.cpp";
-
-//runStr(test, "cpp");
-//runFile(run_file_path, "cpp");
- */
 
 module.exports = { runStr, runFile };

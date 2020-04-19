@@ -13,10 +13,11 @@ const getStatusObject = () => {
   };
 };
 
-const makeOptions = params => {
+const makeOptions = (params, cur_dir) => {
   const options = {
     input: "",
-    timeout: 2000
+    timeout: 2000,
+    cwd: pathBaseDir(cur_dir)
   };
 
   if (!params) return options;
@@ -28,7 +29,7 @@ const makeOptions = params => {
 
 const checkSignalTermination = signal => {
   if (!signal) return null;
-  console.log(signal);
+
   if (signal === "SIGSEGV")
     return { error: true, error_msg: "segmentation fault" };
   if (signal === "SIGTERM")
@@ -84,11 +85,17 @@ const makeTmpFileWithGivenData = (tmp_file_dir_path, extension, content) => {
   return tmp_file_path;
 };
 
+const pathBaseName = (file_name, args) => path.basename(file_name, args);
+const pathExtName = file_name => path.extname(file_name);
+const pathBaseDir = file_path => path.dirname(file_path);
+
 module.exports = {
   makeTmpDir,
   makeTmpFileWithGivenData,
   getLangExtension,
   getStatusObject,
   checkSignalTermination,
-  makeOptions
+  makeOptions,
+  pathBaseName,
+  pathExtName
 };
