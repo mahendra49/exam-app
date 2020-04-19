@@ -30,7 +30,7 @@ const java = `
 }  
 `;
 
-console.log(clang.runStr(c, "c"));
+/* console.log(clang.runStr(c, "c"));
 console.log(cpplang.runStr(cpp, "cpp"));
-console.log(pythonlang.runStr(python, "python"));
+console.log(pythonlang.runStr(python, "python")); */
 console.log(javalang.runStr(java, "java"));

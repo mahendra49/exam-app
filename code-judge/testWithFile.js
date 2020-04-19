@@ -12,7 +12,7 @@ const python =
   "/Users/mahendrasuthar/Desktop/testProjects/exam-app/code-judge/tmps/c912d5e0-8254-11ea-95de-739b9ff320c8/c912d5e1-8254-11ea-95de-739b9ff320c8.py";
 
 const java =
-  "/Users/mahendrasuthar/Desktop/testProjects/exam-app/code-judge/tmps/c929e050-8254-11ea-95de-739b9ff320c8/c929e051-8254-11ea-95de-739b9ff320c8.java";
+  "/Users/mahendrasuthar/Desktop/testProjects/exam-app/code-judge/tmps/eedfd1c0-8258-11ea-85bb-ed82a6c5bafd/eee046f0-8258-11ea-85bb-ed82a6c5bafd.java";
 /* 
 console.log(clang.runFile(c, "c"));
 console.log(cpplang.runFile(cpp, "cpp"));

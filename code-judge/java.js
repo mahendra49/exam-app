@@ -22,6 +22,8 @@ const runStr = (source_code, lang, options) => {
   return cr_status;
 };
 
+// Note : src_file should have main method in class "Main"
+// you can change as per ur requiment
 const runFile = (source_file, lang, options) => {
   const lang_ext = util.getLangExtension(lang);
   if (lang_ext !== ".java" || util.pathExtName(source_file) != ".java")
@@ -31,7 +33,7 @@ const runFile = (source_file, lang, options) => {
   const cc_args = [file_name];
   const cc_status = commandLine.execute("javac", cc_args, options);
   if (cc_status.error) return cc_status;
-  const cr_status = commandLine.execute("java", ["Main"]);
+  const cr_status = commandLine.execute("java", ["Main"], options);
   return cr_status;
 };
 
