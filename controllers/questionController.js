@@ -56,7 +56,7 @@ const createQuestion = async (req, res, next) => {
       .status(500)
       .send({ error: true, message: "Error in creating question" });
   }
-  return res.status(200).json(req.body);
+  return res.status(200).json(question);
 };
 
 /* 

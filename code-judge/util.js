@@ -1,6 +1,7 @@
 const fs = require("fs");
 const uuid = require("uuid").v1;
 const path = require("path");
+const config = require("../configs");
 
 const getStatusObject = () => {
   return {
@@ -17,6 +18,7 @@ const makeOptions = (params, cur_dir) => {
   const options = {
     input: "",
     timeout: 2000,
+    shell: true,
     cwd: pathBaseDir(cur_dir)
   };
 
@@ -31,13 +33,29 @@ const checkSignalTermination = signal => {
   if (!signal) return null;
 
   if (signal === "SIGSEGV")
-    return { error: true, error_msg: "segmentation fault" };
+    return {
+      error: true,
+      error_msg: "segmentation fault",
+      error_code: config.judge.SegmentationFault
+    };
   if (signal === "SIGTERM")
-    return { error: true, error_msg: "process timeout" };
+    return {
+      error: true,
+      error_msg: "process timeout",
+      error_code: config.judge.TimeLimitExceeded
+    };
   if (signal == "SIGFPE")
-    return { error: true, error_msg: "floating point exception" };
+    return {
+      error: true,
+      error_msg: "floating point exception",
+      error_code: config.judge.RuntimeError
+    };
 
-  return { error: true, error_msg: `error ${signal}` };
+  return {
+    error: true,
+    error_msg: `error  ${signal}`,
+    error_code: config.judge.RuntimeError
+  };
 };
 
 const getLangExtension = lang => {
@@ -64,12 +82,11 @@ const getLangExtension = lang => {
  * This will be cleaned up after executing the command
  */
 const makeTmpDir = () => {
-  // outer tmp dir
-  const istmpsExists = fs.existsSync("tmps");
-  if (!istmpsExists) fs.mkdirSync("tmps");
-  const inner_tmp_path = `./tmps/${uuid()}`;
+  const istmpsExists = fs.existsSync(path.join(__dirname, "./tmps"));
+  if (!istmpsExists) fs.mkdirSync(path.join(__dirname, "./tmps"));
+  const inner_tmp_path = `${__dirname}/tmps/${uuid()}`;
   const inner_tmp = fs.mkdirSync(inner_tmp_path);
-  return path.join(__dirname, inner_tmp_path);
+  return inner_tmp_path;
 };
 
 /**

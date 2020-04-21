@@ -1,6 +1,7 @@
 const { spawnSync } = require("child_process");
 const { getStatusObject } = require("./util");
 const { checkSignalTermination } = require("./util");
+const config = require("../configs/");
 
 // see nodejs docx for params for spawnSync
 const execute = (command, args_arr, options) => {
@@ -12,7 +13,8 @@ const execute = (command, args_arr, options) => {
     error_msg: "",
     input_file_path: "",
     object_file_path: "", //[c,c++]
-    time: 0
+    time: 0,
+    error_code: null
   };
 
   const start_time = new Date();
@@ -23,6 +25,7 @@ const execute = (command, args_arr, options) => {
   if (pc.status && pc.status != 0) {
     pc_status.error = true;
     pc_status.error_msg = pc.stderr.toString();
+    pc_status.error_code = config.judge.CompileError;
     return pc_status;
   }
 
@@ -31,6 +34,7 @@ const execute = (command, args_arr, options) => {
   if (signal_termination) {
     pc_status.error = true;
     pc_status.error_msg = signal_termination.error_msg;
+    pc_status.error_code = signal_termination.error_code;
     return pc_status;
   }
 

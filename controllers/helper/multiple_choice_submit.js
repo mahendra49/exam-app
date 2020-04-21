@@ -18,7 +18,7 @@ const _submit = async (user, body) => {
   //2. save the data
   try {
     const _submission = await MCSubmission.create(mc_submission);
-    return true;
+    return { error: false, message: "Test submitted successfully" };
   } catch (err) {
     console.log(`Error --- in submitting test(Multiple Choice)--${err}`);
     return null;

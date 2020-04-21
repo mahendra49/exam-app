@@ -25,7 +25,6 @@ const runFile = (source_file, lang, options) => {
     throw new Error(`${lang} is not supported`);
   options = util.makeOptions(options, source_file);
   const file_name = util.pathBaseName(source_file);
-  //const cc_o_out_file_name = util.pathBaseName(source_file, ".cpp") + ".out";
   const cc_args = [file_name];
   const cc_status = commandLine.execute("python3", cc_args, options);
   return cc_status;

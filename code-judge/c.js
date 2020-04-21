@@ -1,7 +1,7 @@
 const util = require("./util");
 const commandLine = require("./command-line");
 
-const runStr = (source_code, lang, options) => {
+const runStr = (source_code, lang = "c", options) => {
   const tmp_dir = util.makeTmpDir();
   //copy code to tmp folder tmps filest
   const lang_ext = util.getLangExtension(lang);
@@ -25,7 +25,7 @@ const runStr = (source_code, lang, options) => {
   return cr_status;
 };
 
-const runFile = (source_file, lang, options) => {
+const runFile = (source_file, lang = "c", options) => {
   const lang_ext = util.getLangExtension(lang);
   if (lang_ext !== ".c" || util.pathExtName(source_file) != ".c")
     throw new Error(`${lang} is not supported`);

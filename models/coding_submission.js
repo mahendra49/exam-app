@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const configs = require("../configs");
-
+console.log(configs);
 /* 
     Example : 
 
@@ -33,22 +33,17 @@ const codingSubmissionSchema = new mongoose.Schema({
   source_code: String,
   lang: {
     type: String,
-    enum: configs.language
+    enum: configs.languages
   },
   judge_status: {
     // pending or running ?
     type: Number,
     default: configs.judge.Pending
   },
-  status: {
-    //accepted, wrong answer, compiler error etc
-    type: Number,
-    default: configs.judge.Pending
-  },
   test_cases: [],
   time: {
-    type: Number,
-    default: 0
+    type: Number, //Not using this..as we have time for indiviual test cases
+    default: 0 // use this for overall problem status max(test_cases.time)
   },
   memory: {
     type: Number,
@@ -79,7 +74,5 @@ codingSubmissionSchema.pre("validate", function(next) {
     next();
   }
 });
-
-codingSubmissionSchema.pre("save", function(next) {});
 
 module.exports = mongoose.model("CodingSubmission", codingSubmissionSchema);

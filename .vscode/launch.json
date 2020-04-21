@@ -31,7 +31,7 @@
                 "<node_internals>/**",
                 "${workspaceFolder}/node_modules/**/*.js"
             ],
-            "program": "/Users/mahendrasuthar/Desktop/testProjects/exam-app/code-judge/**/*.js"
+            "program": "${workspaceFolder}/server.js"
         }
     ]
 }

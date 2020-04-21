@@ -11,14 +11,16 @@ config.judge = {
   WrongAnswer: 5,
   TimeLimitExceeded: 6,
   MemoryLimitExceed: 7,
-  OutputLimitExceed: 8
+  OutputLimitExceed: 8,
+  PartiallyAccepted: 9,
+  SegmentationFault: 10
 };
 
 config.multiple_choice = {
   default_selected_choice: ["NONE"]
 };
 
-config.languages = ["c++", "java", "c", "python"];
+config.languages = ["cpp", "java", "c", "python"];
 
 config.TMP_FILES = path.join(__dirname, "..", "code-judger/tmps/");
 config.ROOT_PATH = path.join(__dirname, "..");

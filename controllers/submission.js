@@ -34,12 +34,15 @@ const submit = async (req, res, next) => {
       .status(500)
       .send({ error: true, message: "Error occured, please check the url" });
 
-  //pass all other details like req.session.user and test_id and question_id
-  const submit_result = await Submitter._submit(_user, submit_body);
-  //check for error in submit result like for DB error or req error
-
-  //send them in response
-  //res.send //here
+  try {
+    //pass all other details like req.session.user and test_id and question_id
+    const submit_result = await Submitter._submit(_user, submit_body);
+    res.status(200).send(submit_result);
+  } catch (error) {
+    res
+      .status(500)
+      .send({ error: true, message: "error in submission" + error });
+  }
 };
 
 module.exports = { submit };
