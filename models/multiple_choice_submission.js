@@ -1,6 +1,18 @@
 const mongoose = require("mongoose");
 const MULTIPLE_CHOICE = require("../configs").multiple_choice;
 
+/* 
+
+  test_id:"Id",
+  submission:[
+    {
+      multiple_choice_id:
+      selected_choice:[]
+    }
+  ]  
+
+*/
+
 const multipleChoiceSubmission = new mongoose.Schema({
   username: {
     type: String,
@@ -29,13 +41,15 @@ multipleChoiceSubmission.pre("validate", function(next) {
     if (!mc.selected_choice)
       mc.selected_choice = MULTIPLE_CHOICE.default_selected_choice;
   });
+  next();
 });
 
-multipleChoiceSubmission.pre("save", function(params) {
+multipleChoiceSubmission.pre("save", function(next) {
   this.test_id = mongoose.Types.ObjectId(this.test_id);
   this.submission.forEach(_sub => {
     _sub.multiple_choice_id = mongoose.Types.ObjectId(_sub.multiple_choice_id);
   });
+  next();
 });
 
 module.exports = mongoose.model(
