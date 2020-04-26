@@ -17,7 +17,7 @@ config.judge = {
 };
 
 config.multiple_choice = {
-  default_selected_choice: ["NONE"]
+  default_selected_choice: "NONE"
 };
 
 config.languages = ["cpp", "java", "c", "python"];

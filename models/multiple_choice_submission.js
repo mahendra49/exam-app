@@ -22,11 +22,11 @@ const multipleChoiceSubmission = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: [true, "test_id is required"]
   },
-  submission: [
+  submissions: [
     {
       multiple_choice_id: mongoose.Types.ObjectId,
       selected_choice: {
-        type: [String],
+        type: String,
         default: MULTIPLE_CHOICE.default_selected_choice
       }
     }
@@ -34,7 +34,7 @@ const multipleChoiceSubmission = new mongoose.Schema({
 });
 
 multipleChoiceSubmission.pre("validate", function(next) {
-  const _mcs = this.submission;
+  const _mcs = this.submissions;
   _mcs.forEach(mc => {
     if (!mc.multiple_choice_id)
       next(new Error("multiple choice ID not specfied for some MC questions"));
@@ -46,7 +46,8 @@ multipleChoiceSubmission.pre("validate", function(next) {
 
 multipleChoiceSubmission.pre("save", function(next) {
   this.test_id = mongoose.Types.ObjectId(this.test_id);
-  this.submission.forEach(_sub => {
+  console.log(this);
+  this.submissions.forEach(_sub => {
     _sub.multiple_choice_id = mongoose.Types.ObjectId(_sub.multiple_choice_id);
   });
   next();

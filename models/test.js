@@ -41,7 +41,7 @@ const testSchema = new mongoose.Schema({
       }
     ]
   },
-  registered_users: [{ username: { type: String, required: true } }]
+  registered_users: [String]
 });
 
 testSchema.pre("validate", function(next) {

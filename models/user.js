@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "email is required"],
     unique: true
+  },
+  is_admin: {
+    type: Boolean,
+    enum: [true, false],
+    default: false
   }
 });
 

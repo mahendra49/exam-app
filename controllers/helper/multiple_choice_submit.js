@@ -10,9 +10,9 @@ const MCSubmission = require("../../models/multiple_choice_submission");
 const _submit = async (user, body) => {
   const username = user.username;
   const test_id = body.test_id;
-  const submission = body.submissions;
+  const submissions = body.submissions;
 
-  const mc_submission = { username, test_id, submission };
+  const mc_submission = { username, test_id, submissions };
   //1. validate all the data
 
   //2. save the data

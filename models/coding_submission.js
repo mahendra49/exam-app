@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const configs = require("../configs");
-console.log(configs);
+
 /* 
     Example : 
 
