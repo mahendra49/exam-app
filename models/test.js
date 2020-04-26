@@ -44,6 +44,11 @@ const testSchema = new mongoose.Schema({
   registered_users: [String]
 });
 
+testSchema.virtual("is_running").get(function() {
+  if (new Date().getTime() > this.end_time) return false;
+  return true;
+});
+
 testSchema.pre("validate", function(next) {
   if (new Date(this.start_time).getTime() > new Date(this.end_time).getTime()) {
     next(new Error("start time greater than end time"));
